@@ -9,19 +9,25 @@ import {
 /**
  * Данные о звездной системе (в т.ч., где центральным телом является черная дыра, нейтронная звезда и т.д.)
  */
-export interface SystemData<T extends StarType = StarType.STAR> {
+export interface SystemData<T extends StarType> {
   /** название системы */
-  name: string;
+  readonly name: string;
   /** тип системы */
-  starType: T;
+  readonly starType: T;
   /** класс светимости (для звезд) */
-  luminosityClass?: T extends StarType.STAR ? StarLuminosityClass : never;
+  readonly luminosityClass?: T extends StarType.STAR ? StarLuminosityClass : never;
   /** спектральный класс (для звезд) */
-  spectralClass?: T extends StarType.STAR ? StarSpectralClass : never;
+  readonly spectralClass?: T extends StarType.STAR ? StarSpectralClass : never;
   /** тип черной дыры */
-  blackHoleType?: T extends StarType.BLACK_HOLE ? BlackHoleType : never;
+  readonly blackHoleType?: T extends StarType.BLACK_HOLE ? BlackHoleType : never;
   /** планеты */
-  planets: PlanetData[];
+  readonly planets: PlanetData[];
+  /** долгота */
+  readonly x: number;
+  /** широта */
+  readonly y: number;
+  /** сид системы */
+  readonly id: string;
 }
 
 /**
@@ -29,31 +35,31 @@ export interface SystemData<T extends StarType = StarType.STAR> {
  */
 export interface PlanetData {
   /** название планеты */
-  name: string;
+  readonly name: string;
   /** ресурсы и их распространенность */
-  resources: Partial<Record<RawResource, number>>;
+  readonly resources: Partial<Record<RawResource, number>>;
   /** средняя температура на планете */
-  temperature: number;
+  readonly temperature: number;
   /** средний уровень радиации (от 1 до 10) */
-  radiationLevel: number;
+  readonly radiationLevel: number;
   /** сила тяжести, g (на земле 1 g) */
-  gravity: number;
+  readonly gravity: number;
   /** атмосферное давление (% от земного) */
-  pressure: number;
+  readonly pressure: number;
   /** средний уровень токсинов (от 0 до 10) */
-  toxicityLevel: number;
+  readonly toxicityLevel: number;
   /** продолжительность суток (часов) */
-  dayLength: number;
+  readonly dayLength: number;
   /** кол-во дней в году */
-  yearLength: number;
+  readonly yearLength: number;
   /** уровень тектонической активности (от 0 до 10) */
-  tectonicActivity: number;
+  readonly tectonicActivity: number;
   /** магнитное поле (µT) */
-  magneticField: number;
+  readonly magneticField: number;
   /** радиус планеты (доля от базового размера) */
-  size: number;
+  readonly size: number;
   /** время года */
-  season: TimeOfYear;
+  readonly season: TimeOfYear;
   /** орбитальная позиция */
-  orbitalPosition: {x: number; y: number};
+  readonly orbitalPosition: {readonly x: number; readonly y: number};
 }
