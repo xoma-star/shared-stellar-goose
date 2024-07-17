@@ -4,7 +4,10 @@
   "description": "Библиотека с базовыми сущностями",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "repository": "https://github.com/xoma-star/shared-stellar-goose.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xoma-star/shared-stellar-goose.git"
+  },
   "author": "xoma_star",
   "license": "MIT",
   "devDependencies": {
