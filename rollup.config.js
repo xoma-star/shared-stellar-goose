@@ -1,14 +1,32 @@
-const typescript = require('@rollup/plugin-typescript');
+import dts from 'rollup-plugin-dts';
+import esbuild from 'rollup-plugin-esbuild';
 
-module.exports = {
-  input: './src/index.ts',
-  output: [
-    {
-      file: './dist/index.js',
+const bundle = (config) => ({
+  ...config,
+  input: 'src/index.ts'
+});
+
+export default [
+  bundle({
+    plugins: [esbuild()],
+    output: [
+      {
+        file: './dist/index.js',
+        format: 'cjs',
+        sourcemap: true
+      },
+      {
+        file: './dist/index.mjs',
+        format: 'es',
+        sourcemap: true
+      }
+    ]
+  }),
+  bundle({
+    plugins: [dts()],
+    output: {
+      file: './dist/index.d.ts',
       format: 'esm'
     }
-  ],
-  plugins: [
-    typescript()
-  ],
-}
+  })
+];
