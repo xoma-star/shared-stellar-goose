@@ -145,68 +145,57 @@ export const BLACK_HOLE_TYPE_FREQUENCY: Record<BlackHoleType, number> = {
  * если не указано распределение по классам светимости, то такие звезды не встречаются
  * либо встречаются ничтожно редко
  */
-export const STARS_DISTRIBUTION: Record<StarSpectralClass, {
-  frequency: number,
-  luminosityClasses: Partial<Record<StarLuminosityClass, number>>
-}> = {
+export const STARS_DISTRIBUTION: Record<StarSpectralClass, number> = {
+  [StarSpectralClass.O]: 0.1,
+  [StarSpectralClass.B]: 0.1,
+  [StarSpectralClass.A]: 0.1,
+  [StarSpectralClass.F]: 0.1,
+  [StarSpectralClass.G]: 0.15,
+  [StarSpectralClass.K]: 0.2,
+  [StarSpectralClass.M]: 0.25
+};
+
+/** распределение светимостей по спектральному классу */
+export const STAR_LUMINOSITY_BY_SPECTRAL_CLASS: Record<
+  StarSpectralClass, Partial<Record<StarLuminosityClass, number>>
+> = {
   [StarSpectralClass.O]: {
-    frequency: 0.05385,
-    luminosityClasses: {
-      [StarLuminosityClass.III]: 0.34,
-      [StarLuminosityClass.V]: 0.66
-    }
+    [StarLuminosityClass.III]: 0.34,
+    [StarLuminosityClass.V]: 0.66
   },
   [StarSpectralClass.B]: {
-    frequency: 0.12,
-    luminosityClasses: {
-      [StarLuminosityClass.I]: 0.007,
-      [StarLuminosityClass.II]: 0.076,
-      [StarLuminosityClass.III]: 0.23,
-      [StarLuminosityClass.V]: 0.687
-    }
+    [StarLuminosityClass.I]: 0.007,
+    [StarLuminosityClass.II]: 0.076,
+    [StarLuminosityClass.III]: 0.23,
+    [StarLuminosityClass.V]: 0.687
   },
   [StarSpectralClass.A]: {
-    frequency: 0.16,
-    luminosityClasses: {
-      [StarLuminosityClass.III]: 0.16,
-      [StarLuminosityClass.IV]: 0.16,
-      [StarLuminosityClass.V]: 0.68
-    }
+    [StarLuminosityClass.III]: 0.16,
+    [StarLuminosityClass.IV]: 0.16,
+    [StarLuminosityClass.V]: 0.68
   },
   [StarSpectralClass.F]: {
-    frequency: 0.20,
-    luminosityClasses: {
-      [StarLuminosityClass.II]: 0.07,
-      [StarLuminosityClass.III]: 0.17,
-      [StarLuminosityClass.IV]: 0.27,
-      [StarLuminosityClass.V]: 0.49
-    }
+    [StarLuminosityClass.II]: 0.07,
+    [StarLuminosityClass.III]: 0.17,
+    [StarLuminosityClass.IV]: 0.27,
+    [StarLuminosityClass.V]: 0.49
   },
   [StarSpectralClass.G]: {
-    frequency: 0.26,
-    luminosityClasses: {
-      [StarLuminosityClass.II]: 0.013,
-      [StarLuminosityClass.III]: 0.131,
-      [StarLuminosityClass.IV]: 0.197,
-      [StarLuminosityClass.V]: 0.659
-    }
+    [StarLuminosityClass.II]: 0.013,
+    [StarLuminosityClass.III]: 0.131,
+    [StarLuminosityClass.IV]: 0.197,
+    [StarLuminosityClass.V]: 0.659
   },
   [StarSpectralClass.K]: {
-    frequency: 0.34615,
-    luminosityClasses: {
-      [StarLuminosityClass.II]: 0.008,
-      [StarLuminosityClass.III]: 0.082,
-      [StarLuminosityClass.IV]: 0.165,
-      [StarLuminosityClass.V]: 0.745
-    }
+    [StarLuminosityClass.II]: 0.008,
+    [StarLuminosityClass.III]: 0.082,
+    [StarLuminosityClass.IV]: 0.165,
+    [StarLuminosityClass.V]: 0.745
   },
   [StarSpectralClass.M]: {
-    frequency: 0.45,
-    luminosityClasses: {
-      [StarLuminosityClass.III]: 0.004,
-      [StarLuminosityClass.IV]: 0.001,
-      [StarLuminosityClass.V]: 0.995
-    }
+    [StarLuminosityClass.III]: 0.004,
+    [StarLuminosityClass.IV]: 0.001,
+    [StarLuminosityClass.V]: 0.995
   }
 };
 
@@ -459,16 +448,6 @@ export const COMPONENT_RESOURCE_NAME: Record<ComponentResource, string> = {
   [ComponentResource.CONTAINER]: 'Универсальный контейнер'
 };
 
-/** технологии TODO: подумать, хрень какая-то */
-export enum TechnologyResource {
-  DRILL = 'drill'
-}
-
-/** TODO подумать, хрень какая-то */
-export const TechnologyResourceName: Record<TechnologyResource, string> = {
-  [TechnologyResource.DRILL]: 'Прочный бур'
-};
-
 /** модули колоний */
 export enum BuildingResource {
   DRILLING_RIG = 'drilling-rig',
@@ -535,16 +514,7 @@ export const CRAFT_REQUIREMENTS: CraftRequirements = {
 };
 
 /** базовая вероятность возникновения звездной системы */
-export const BASE_SYSTEM_APPEAR_PROBABILITY = 1;
-
-/** размер чанка вселенной */
-export const CHUNK_SIZE = 32;
-
-/** максимальная глубина чанка (кол-во знаков в координатах) */
-export const MAX_CHUNK_DEPTH = 5;
-
-const WIDE_AVAILABLE_RESOURCES: RawResource[] = [
-];
+export const BASE_SYSTEM_APPEAR_PROBABILITY = 0.05;
 
 /** времена года */
 export enum TimeOfYear {
