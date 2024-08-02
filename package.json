@@ -1,6 +1,6 @@
 {
   "name": "@xoma_star/shared-stellar-goose",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "Библиотека с базовыми сущностями",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

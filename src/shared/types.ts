@@ -50,11 +50,11 @@ export interface SystemData<T extends StarType> {
   /** тип системы */
   readonly starType: T;
   /** класс светимости (для звезд) */
-  readonly luminosityClass?: T extends StarType.STAR ? StarLuminosityClass : never;
+  readonly luminosityClass: T extends StarType.STAR ? StarLuminosityClass : never;
   /** спектральный класс (для звезд) */
-  readonly spectralClass?: T extends StarType.STAR ? StarSpectralClass : never;
+  readonly spectralClass: T extends StarType.STAR ? StarSpectralClass : never;
   /** тип черной дыры */
-  readonly blackHoleType?: T extends StarType.BLACK_HOLE ? BlackHoleType : never;
+  readonly blackHoleType: T extends StarType.BLACK_HOLE ? BlackHoleType : never;
   /** планеты */
   readonly planets: PlanetData[];
   /** долгота */
@@ -63,4 +63,6 @@ export interface SystemData<T extends StarType> {
   readonly y: number;
   /** сид системы */
   readonly id: string;
+  /** куда ведет (только для червоточины) */
+  readonly leadTo: T extends StarType.WORMHOLE ? {readonly x: number, readonly y: number} : never;
 }
